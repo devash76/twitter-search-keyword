@@ -2,7 +2,7 @@
 
 A Django based web application that will retrieve latest tweets based on the keyword searched.
 
-#Steps to use:
+## Steps to use:
 
 1. Clone the repository
 2. Create a twitter developer account and get secret keys

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}
+Tweetzo
+{% endblock  %}
+{% block body %}
+<div class="container py-3">
+<form action="/search" method="POST">
+{% csrf_token %}
+  <div class="form-group" >
+    <label for="keyword">Keyword</label>
+    <input type="text" class="form-control" id="keyword" name="keyword" aria-describedby="emailHelp" placeholder="Enter Keyword">
+    <small id="emailHelp" class="form-text text-muted">Enter keyword thet you need to search.</small>
+  </div>
+<div class="form-group">
+    <label for="number">Number of Tweets</label>
+    <input type="number" class="form-control" id="number" name="number" placeholder="Number of Tweets">
+  </div>
+ 
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+{%load custom_tags%}
+{% if usernames %}
+<div class="row">
+{% for username in usernames %}
+{% with forloop.counter as counter %}
+
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{usernames|lookup:counter}}</h5>
+        <p class="card-text">{{texts|lookup:counter}}</p>
+        <a href="{{links|lookup:counter}}" class="btn btn-primary">Go to Tweet</a>
+      </div>
+    </div>
+
+{% endwith %}
+{% endfor %}
+</div>
+{% else %}
+    <div>No new tweets for you</div>
+{% endif %} 
+
+{% endblock  %}
